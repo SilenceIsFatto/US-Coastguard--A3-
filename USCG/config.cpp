@@ -89,27 +89,4 @@ class cfgVehicles
 		slingLoadCargoMemoryPoints[] = {"SlingLoadCargo1","SlingLoadCargo2","SlingLoadCargo3","SlingLoadCargo4"};
 	};
 	*/
-	class ReammoBox;
-	class USCG_Backpack: ReammoBox
-	{
-		scope = 1;
-		class TransportMagazines {};
-		class TransportWeapons{};
-		isbackpack = 1;
-		reversed = 1;
-		mapSize = 2;
-		vehicleClass = "Backpacks";
-		allowedSlots[] = {901};
-		model = "\USCG\USCGBackpack";
-		displayName = "USCG Backpack";
-		picture = "\A3\Weapons_F\Ammoboxes\Bags\data\ui\backpack_CA.paa";
-		icon = "iconBackpack";
-		transportMaxWeapons = 1;
-		transportMaxMagazines = 20;
-		class DestructionEffects {};
-		hiddenSelections[] = {""};
-		hiddenSelectionsTextures[] = {""};
-		maximumLoad = 500;
-		side = 3;
-	};
 };

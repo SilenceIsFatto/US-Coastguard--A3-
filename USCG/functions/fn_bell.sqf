@@ -89,34 +89,6 @@ mst_fnc_deployHelicopterStretcherBell = {
 	publicVariable "hasDeployedBasket";
 };
 
-mst_fnc_shortenRopeHH60 = {
-	player setVariable ['ropeDistance', 3];
-	_ropeDistance = player getVariable "ropeDistance";
-	//hint _ropeDistance;
-	//if (_ropeDistance > 5) then {
-		//hint "Ropes can't be shorter than 5, defaulting to 3";
-		//_ropeDistance = 3;
-	//};
-	{
-		ropeUnwind [_x, 3, _ropeDistance];
-	} forEach ropes vehicle player;
-	titleText ["Ropes have been shortened!","PLAIN DOWN"];
-};
-
-mst_fnc_lengthenRopeHH60 = {
-	player setVariable ['ropeDistance', 30];
-	_ropeDistance = player getVariable "ropeDistance";
-	//hint _ropeDistance;
-	//if (_ropeDistance > 100) then {
-		//hint "Ropes can't be longer than 100, defaulting to 90";
-		//_ropeDistance = 90;
-	//};
-	{
-		ropeUnwind [_x, 6, _ropeDistance];
-	} forEach ropes vehicle player;
-	titleText ["Ropes have been lengthened!","PLAIN DOWN"];
-};
-
 mst_fnc_moveInAllOccupants = {
 	{
 		_x moveInAny vehicle player;
@@ -150,71 +122,71 @@ _action = ['mst_deployBasket','Rescue Basket',"\USCG\textures\icon_basket.paa",{
 ["CUP_412_Medic_Base_F", 1, ["ACE_SelfActions"], _action, true] call ace_interact_menu_fnc_addActionToClass;
 
 _action = ['mst_etcFunctions','Equipment Functions',"\USCG\textures\icon_basket.paa",{},
-{"CUP" in typeOf vehicle player, hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
+{"CUP" in typeOf vehicle player && hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
 ["CUP_412_Medic_Base_F", 1, ["ACE_SelfActions"], _action, true] call ace_interact_menu_fnc_addActionToClass;
 
 _action = ['mst_cameraFunctions','Camera Functions',"\USCG\textures\icon_basket.paa",{},
-{"CUP" in typeOf vehicle player, hasDeployedBasket, isUsingCamera}] call ace_interact_menu_fnc_createAction;
+{"CUP" in typeOf vehicle player && hasDeployedBasket && isUsingCamera}] call ace_interact_menu_fnc_createAction;
 ["CUP_412_Medic_Base_F", 1, ["ACE_SelfActions"], _action, true] call ace_interact_menu_fnc_addActionToClass;
  
 _action = ['deployBasket','Deploy Rescue Basket','',{call mst_fnc_deployHelicopterBasketBell, call mst_fnc_handleRopeDetach, call mst_fnc_handleRopeAttach},
-{"CUP" in typeOf vehicle player, !hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
+{"CUP" in typeOf vehicle player && !hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
 ["CUP_412_Medic_Base_F", 1, ["ACE_SelfActions", "mst_deployBasket"], _action, true] call ace_interact_menu_fnc_addActionToClass;
 
 //_action = ['deployBasket','Deploy Alternate Rescue Basket','',{call mst_fnc_deployHelicopterAltBasketHH60, call mst_fnc_handleRopeDetach, call mst_fnc_handleRopeAttach},
-//{"CUP" in typeOf vehicle player, !hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
+//{"CUP" in typeOf vehicle player && !hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
 //["CUP_412_Medic_Base_F", 1, ["ACE_SelfActions", "mst_deployBasket"], _action, true] call ace_interact_menu_fnc_addActionToClass;
 
 _action = ['startCameraFeed','Start Camera Feed','',{call mst_fnc_startCameraFeed},
-{"CUP" in typeOf vehicle player, hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
+{"CUP" in typeOf vehicle player && hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
 ["CUP_412_Medic_Base_F", 1, ["ACE_SelfActions", "mst_etcFunctions"], _action, true] call ace_interact_menu_fnc_addActionToClass;
 
 _action = ['terminateCameraFeed','Terminate Camera Feed','',{call mst_fnc_destroyCameraFeed},
-{"CUP" in typeOf vehicle player, hasDeployedBasket, isUsingCamera}] call ace_interact_menu_fnc_createAction;
+{"CUP" in typeOf vehicle player && hasDeployedBasket && isUsingCamera}] call ace_interact_menu_fnc_createAction;
 ["CUP_412_Medic_Base_F", 1, ["ACE_SelfActions", "mst_cameraFunctions"], _action, true] call ace_interact_menu_fnc_addActionToClass;
 
 _action = ['startNVFeed','Camera Feed > NVG','',{camUseNVG true},
-{"CUP" in typeOf vehicle player, hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
+{"CUP" in typeOf vehicle player && hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
 ["CUP_412_Medic_Base_F", 1, ["ACE_SelfActions", "mst_cameraFunctions"], _action, true] call ace_interact_menu_fnc_addActionToClass;
 
 _action = ['startTIFeed','Camera Feed > Thermal','',{true setCamUseTI 0},
-{"CUP" in typeOf vehicle player, hasDeployedBasket, isUsingCamera}] call ace_interact_menu_fnc_createAction;
+{"CUP" in typeOf vehicle player && hasDeployedBasket && isUsingCamera}] call ace_interact_menu_fnc_createAction;
 ["CUP_412_Medic_Base_F", 1, ["ACE_SelfActions", "mst_cameraFunctions"], _action, true] call ace_interact_menu_fnc_addActionToClass;
 
-_action = ['Restart Camera Feed','Camera Feed > Normal','',{false setCamUseTI 0},
-{"CUP" in typeOf vehicle player, hasDeployedBasket, isUsingCamera}] call ace_interact_menu_fnc_createAction;
+_action = ['Restart Camera Feed','Camera Feed > Normal','',{false setCamUseTI 0, camUseNVG false},
+{"CUP" in typeOf vehicle player && hasDeployedBasket && isUsingCamera}] call ace_interact_menu_fnc_createAction;
 ["CUP_412_Medic_Base_F", 1, ["ACE_SelfActions", "mst_cameraFunctions"], _action, true] call ace_interact_menu_fnc_addActionToClass;
 
-_action = ['swapRopeLength','Set Rope Length (WIP, no works)','',{call mst_fnc_setRopeLength},
-{"CUP" in typeOf vehicle player, hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
+_action = ['swapRopeLength','Set Rope Length (WIP)','',{call mst_fnc_setRopeLength},
+{"CUP" in typeOf vehicle player && hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
 ["CUP_412_Medic_Base_F", 1, ["ACE_SelfActions", "mst_etcFunctions"], _action, true] call ace_interact_menu_fnc_addActionToClass;
 
 _action = ['getDataReadings','Read Data','',{call mst_fnc_getDataReadings},
-{"CUP" in typeOf vehicle player, hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
+{"CUP" in typeOf vehicle player && hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
 ["CUP_412_Medic_Base_F", 1, ["ACE_SelfActions", "mst_etcFunctions"], _action, true] call ace_interact_menu_fnc_addActionToClass;
 
 _action = ['deployStretcher','Deploy Rescue Stretcher','',{call mst_fnc_deployHelicopterStretcherBell, call mst_fnc_handleRopeDetach, call mst_fnc_handleRopeAttach},
-{"CUP" in typeOf vehicle player, !hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
+{"CUP" in typeOf vehicle player && !hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
 ["CUP_412_Medic_Base_F", 1, ["ACE_SelfActions", "mst_deployBasket"], _action, true] call ace_interact_menu_fnc_addActionToClass;
 
 _action = ['raiseBasket','Raise Rescue Basket','',{call mst_fnc_shortenRopeHH60},
-{"CUP" in typeOf vehicle player, ropeLength (ropes vehicle player select 0) >= 3, hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
+{"CUP" in typeOf vehicle player && ropeLength (ropes vehicle player select 0) >= 3 && hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
 ["CUP_412_Medic_Base_F", 1, ["ACE_SelfActions", "mst_deployBasket"], _action, true] call ace_interact_menu_fnc_addActionToClass;
 
 _action = ['lowerBasket','Lower Rescue Basket','',{call mst_fnc_lengthenRopeHH60},
-{"CUP" in typeOf vehicle player, ropeLength (ropes vehicle player select 0) <= 5, hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
+{"CUP" in typeOf vehicle player && ropeLength (ropes vehicle player select 0) <= 5 && hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
 ["CUP_412_Medic_Base_F", 1, ["ACE_SelfActions", "mst_deployBasket"], _action, true] call ace_interact_menu_fnc_addActionToClass;
 
 _action = ['moveBasketCrew','Move Basket Crew Into Vehicle','',{call mst_fnc_moveInAllOccupants},
-{"CUP" in typeOf vehicle player, ropeLength (ropes vehicle player select 0) <= 5, hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
+{"CUP" in typeOf vehicle player && ropeLength (ropes vehicle player select 0) <= 5 && hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
 ["CUP_412_Medic_Base_F", 1, ["ACE_SelfActions", "mst_etcFunctions"], _action, true] call ace_interact_menu_fnc_addActionToClass;
 
 _action = ['moveIntoBasket','Move Into Rescue Basket','',{call mst_fnc_moveIntoBasket},
-{"CUP" in typeOf vehicle player, ropeLength (ropes vehicle player select 0) <= 5, driver vehicle player != player, hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
+{"CUP" in typeOf vehicle player && ropeLength (ropes vehicle player select 0) <= 5 && driver vehicle player != player && hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
 ["CUP_412_Medic_Base_F", 1, ["ACE_SelfActions", "mst_etcFunctions"], _action, true] call ace_interact_menu_fnc_addActionToClass;
 
 _action = ['secureBasket','Secure Rescue Basket','',{call mst_fnc_deleteBasket},
-{"CUP" in typeOf vehicle player, ropeLength (ropes vehicle player select 0) <= 5, hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
+{"CUP" in typeOf vehicle player && ropeLength (ropes vehicle player select 0) <= 5 && hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
 ["CUP_412_Medic_Base_F", 1, ["ACE_SelfActions", "mst_deployBasket"], _action, true] call ace_interact_menu_fnc_addActionToClass;
 
 // These actually add the actions, making them functional.

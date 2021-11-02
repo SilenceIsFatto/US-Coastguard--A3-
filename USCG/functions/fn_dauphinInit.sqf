@@ -149,6 +149,7 @@ mst_fnc_deployHelicopterHook = {
 	publicVariable "EMSRopes";
 };
 
+/*
 mst_fnc_shortenRope = {
 	{
 		ropeUnwind [_x, 3, 3];
@@ -162,6 +163,7 @@ mst_fnc_lengthenRope = {
 	} forEach ropes vehicle player;
 	titleText ["Ropes have been lengthened to 30m!","PLAIN DOWN"];
 };
+*/
 
 mst_fnc_moveInAllOccupants = {
 	{
@@ -196,61 +198,61 @@ _action = ['mst_deployBasket','Rescue Basket',"\USCG\textures\icon_basket.paa",{
 ["AS_365_base", 1, ["ACE_SelfActions"], _action, true] call ace_interact_menu_fnc_addActionToClass;
 
 _action = ['mst_etcFunctions','Equipment Functions',"\USCG\textures\icon_basket.paa",{},
-{"AS" in typeOf vehicle player, hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
+{"AS" in typeOf vehicle player && hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
 ["AS_365_base", 1, ["ACE_SelfActions"], _action, true] call ace_interact_menu_fnc_addActionToClass;
  
 _action = ['mst_cameraFunctions','Camera Functions',"\USCG\textures\icon_basket.paa",{},
-{"AS" in typeOf vehicle player, hasDeployedBasket, isUsingCamera}] call ace_interact_menu_fnc_createAction;
+{"AS" in typeOf vehicle player && hasDeployedBasket && isUsingCamera}] call ace_interact_menu_fnc_createAction;
 ["AS_365_base", 1, ["ACE_SelfActions"], _action, true] call ace_interact_menu_fnc_addActionToClass;
  
-_action = ['swapRopeLength','Set Rope Length (WIP, no works)','',{call mst_fnc_setRopeLength},
-{"AS" in typeOf vehicle player, hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
-["AS_365_base", 1, ["ACE_SelfActions", "mst_etcFunctions"], _action, true] call ace_interact_menu_fnc_addActionToClass;
+_action = ['swapRopeLength','Set Rope Length (WIP)','',{call mst_fnc_setRopeLength},
+{"AS" in typeOf vehicle player && hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
+["AS_365_base", 1, ["ACE_SelfActions", "mst_deployBasket"], _action, true] call ace_interact_menu_fnc_addActionToClass;
 
 _action = ['getDataReadings','Read Data','',{call mst_fnc_getDataReadings},
-{"AS" in typeOf vehicle player, hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
+{"AS" in typeOf vehicle player && hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
 ["AS_365_base", 1, ["ACE_SelfActions", "mst_etcFunctions"], _action, true] call ace_interact_menu_fnc_addActionToClass; 
  
 _action = ['deployBasket','Deploy Rescue Basket','',{call mst_fnc_deployHelicopterBasket, call mst_fnc_handleRopeDetach, call mst_fnc_handleRopeAttach},
-{"AS" in typeOf vehicle player, !hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
+{"AS" in typeOf vehicle player && !hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
 ["AS_365_base", 1, ["ACE_SelfActions", "mst_deployBasket"], _action, true] call ace_interact_menu_fnc_addActionToClass;
 
 _action = ['deployStretcher','Deploy Rescue Stretcher','',{call mst_fnc_deployHelicopterStretcher, call mst_fnc_handleRopeDetach, call mst_fnc_handleRopeAttach},
-{"AS" in typeOf vehicle player, !hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
+{"AS" in typeOf vehicle player && !hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
 ["AS_365_base", 1, ["ACE_SelfActions", "mst_deployBasket"], _action, true] call ace_interact_menu_fnc_addActionToClass;
 
 if (isClass (configFile >> "cfgVehicles" >> "vtx_hook")) then {
 	_action = ['deployHook','Deploy Rescue Hook','',{call mst_fnc_deployHelicopterHook, call mst_fnc_handleRopeDetach, call mst_fnc_handleRopeAttach},
-	{"AS" in typeOf vehicle player, !hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
+	{"AS" in typeOf vehicle player && !hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
 	["AS_365_base", 1, ["ACE_SelfActions", "mst_deployBasket"], _action, true] call ace_interact_menu_fnc_addActionToClass;
 };
 
 _action = ['startCameraFeed','Start Camera Feed','',{call mst_fnc_startCameraFeed},
-{"AS" in typeOf vehicle player, hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
+{"AS" in typeOf vehicle player && hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
 ["AS_365_base", 1, ["ACE_SelfActions", "mst_etcFunctions"], _action, true] call ace_interact_menu_fnc_addActionToClass;
 
 _action = ['terminateCameraFeed','Terminate Camera Feed','',{call mst_fnc_destroyCameraFeed},
-{"AS" in typeOf vehicle player, hasDeployedBasket, isUsingCamera}] call ace_interact_menu_fnc_createAction;
+{"AS" in typeOf vehicle player && hasDeployedBasket && isUsingCamera}] call ace_interact_menu_fnc_createAction;
 ["AS_365_base", 1, ["ACE_SelfActions", "mst_cameraFunctions"], _action, true] call ace_interact_menu_fnc_addActionToClass;
 
 _action = ['startNVFeed','Camera Feed > NVG','',{camUseNVG true},
-{"AS" in typeOf vehicle player, hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
+{"AS" in typeOf vehicle player && hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
 ["AS_365_base", 1, ["ACE_SelfActions", "mst_cameraFunctions"], _action, true] call ace_interact_menu_fnc_addActionToClass;
 
 _action = ['startTIFeed','Camera Feed > Thermal','',{true setCamUseTI 0},
-{"AS" in typeOf vehicle player, hasDeployedBasket, isUsingCamera}] call ace_interact_menu_fnc_createAction;
+{"AS" in typeOf vehicle player && hasDeployedBasket && isUsingCamera}] call ace_interact_menu_fnc_createAction;
 ["AS_365_base", 1, ["ACE_SelfActions", "mst_cameraFunctions"], _action, true] call ace_interact_menu_fnc_addActionToClass;
 
-_action = ['Restart Camera Feed','Camera Feed > Normal','',{false setCamUseTI 0},
-{"AS" in typeOf vehicle player, hasDeployedBasket, isUsingCamera}] call ace_interact_menu_fnc_createAction;
+_action = ['Restart Camera Feed','Camera Feed > Normal','',{false setCamUseTI 0, camUseNVG false},
+{"AS" in typeOf vehicle player && hasDeployedBasket && isUsingCamera}] call ace_interact_menu_fnc_createAction;
 ["AS_365_base", 1, ["ACE_SelfActions", "mst_cameraFunctions"], _action, true] call ace_interact_menu_fnc_addActionToClass;
 
-_action = ['raiseBasket','Raise Rescue Basket','',{call mst_fnc_shortenRope},
-{"AS" in typeOf vehicle player, ropeLength (ropes vehicle player select 0) != 3, hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
+_action = ['raiseBasket','Raise Rescue Basket','',{call mst_fnc_shortenRopeHH60},
+{"AS" in typeOf vehicle player && ropeLength (ropes vehicle player select 0) != 3 && hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
 ["AS_365_base", 1, ["ACE_SelfActions", "mst_deployBasket"], _action, true] call ace_interact_menu_fnc_addActionToClass;
 
-_action = ['lowerBasket','Lower Rescue Basket','',{call mst_fnc_lengthenRope},
-{"AS" in typeOf vehicle player, ropeLength (ropes vehicle player select 0) != 30, hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
+_action = ['lowerBasket','Lower Rescue Basket','',{call mst_fnc_lengthenRopeHH60},
+{"AS" in typeOf vehicle player && ropeLength (ropes vehicle player select 0) != 30 && hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
 ["AS_365_base", 1, ["ACE_SelfActions", "mst_deployBasket"], _action, true] call ace_interact_menu_fnc_addActionToClass;
 
 /*
@@ -264,15 +266,15 @@ _action = ['swapHookNormal','Hook Point - Standard','',{normalRopes = true, EMSR
 */
 
 _action = ['moveBasketCrew','Move Basket Crew Into Vehicle','',{call mst_fnc_moveInAllOccupants},
-{"AS" in typeOf vehicle player, ropeLength (ropes vehicle player select 0) == 3, hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
+{"AS" in typeOf vehicle player && ropeLength (ropes vehicle player select 0) == 3 && hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
 ["AS_365_base", 1, ["ACE_SelfActions", "mst_etcFunctions"], _action, true] call ace_interact_menu_fnc_addActionToClass;
 
 _action = ['moveIntoBasket','Move Into Rescue Basket','',{call mst_fnc_moveIntoBasket},
-{"AS" in typeOf vehicle player, ropeLength (ropes vehicle player select 0) == 3, driver vehicle player != player, hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
+{"AS" in typeOf vehicle player && ropeLength (ropes vehicle player select 0) == 3 && driver vehicle player != player && hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
 ["AS_365_base", 1, ["ACE_SelfActions", "mst_etcFunctions"], _action, true] call ace_interact_menu_fnc_addActionToClass;
 
 _action = ['secureBasket','Secure Rescue Basket','',{call mst_fnc_deleteBasket},
-{"AS" in typeOf vehicle player, ropeLength (ropes vehicle player select 0) == 3, hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
+{"AS" in typeOf vehicle player && ropeLength (ropes vehicle player select 0) == 3 && hasDeployedBasket}] call ace_interact_menu_fnc_createAction;
 ["AS_365_base", 1, ["ACE_SelfActions", "mst_deployBasket"], _action, true] call ace_interact_menu_fnc_addActionToClass;
 
 // These actually add the actions, making them functional.
