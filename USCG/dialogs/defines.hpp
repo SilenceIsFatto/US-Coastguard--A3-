@@ -4,6 +4,15 @@
 
 // Control types
 
+#define GUI_TEXT_SIZE_SMALL 	(GUI_GRID_H * 0.8)
+#define GUI_TEXT_SIZE_MEDIUM 	(GUI_GRID_H * 1)
+#define GUI_TEXT_SIZE_LARGE 	(GUI_GRID_H * 1.2)
+
+#define GUI_GRID_X			(safezoneX)
+#define GUI_GRID_Y			(safezoneY + safezoneH - (((safezoneW / safezoneH) min 1.2)/ 1.2))
+#define GUI_GRID_W (0.025)
+#define GUI_GRID_H (0.04)
+
 #define CT_STATIC           0
 #define CT_BUTTON           1
 #define CT_EDIT             2
@@ -97,6 +106,59 @@
 ///////////////////////////////////////////////////////////////////////////
 /// Base Classes
 ///////////////////////////////////////////////////////////////////////////
+
+class RscListBox
+{
+     access = 0;
+     type = 5;
+     style = 0;
+     w = 0.4;
+     h = 0.4;
+     font = "RobotoCondensed";
+     sizeEx = 0.04;
+     rowHeight = 0;
+     colorText[] = {1,1,1,1};
+     colorScrollbar[] = {1,1,1,1};
+     colorSelect[] = {0,0,0,1};
+     colorSelect2[] = {1,0.5,0,1};
+     colorSelectBackground[] = {0.6,0.6,0.6,1};
+     colorSelectBackground2[] = {0.2,0.2,0.2,1};
+     colorBackground[] = {0.2,0.2,0.2,0.9};
+     maxHistoryDelay = 1.0;
+     soundSelect[] = {"",0.1,1};
+     period = 1;
+     autoScrollSpeed = -1;
+     autoScrollDelay = 5;
+     autoScrollRewind = 0;
+     arrowEmpty = "#(argb,8,8,3)color(1,1,1,1)";
+     arrowFull = "#(argb,8,8,3)color(1,1,1,1)";
+     shadow = 0;
+     class ListScrollBar// : ScrollBar //ListScrollBar is class name required for Arma 3
+     {
+          color[] = {1,1,1,0.6};
+          colorActive[] = {1,1,1,1};
+          colorDisabled[] = {1,1,1,0.3};
+          thumb = "#(argb,8,8,3)color(1,1,1,1)";
+          arrowEmpty = "#(argb,8,8,3)color(1,1,1,1)";
+          arrowFull = "#(argb,8,8,3)color(1,1,1,1)";
+          border = "#(argb,8,8,3)color(1,1,1,1)";
+          shadow = 0;
+     };
+};
+
+class RscFrame
+{
+    type = CT_STATIC;
+    idc = -1;
+    style = ST_FRAME;
+    shadow = 2;
+    colorBackground[] = {1,1,1,1};//{1,1,1,1}
+    colorText[] = {1,1,1,0.9};
+    font = "RobotoCondensed";
+    sizeEx = 0.03;
+    text = "";
+};
+
 class RscText
 {
 	deletable = 0;

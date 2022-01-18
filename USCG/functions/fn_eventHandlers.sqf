@@ -1,3 +1,17 @@
+mst_fnc_handleRopeDetach = {
+	_heli = nearestObjects [player, ["Air"], 2] select 0;
+	vehicle player addEventHandler ["RopeBreak",{
+		params ["_object1", "_rope", "_object2"];
+		{
+			ropeDestroy _x;
+		} forEach ropes vehicle player;
+		deleteVehicle basket;
+		hasDeployedBasket = false;
+		publicVariable "hasDeployedBasket";
+		vehicle player animateSource ['hoist_hook_hide', 0];
+	}];
+};
+
 mst_fnc_addUSCGEH = {
 	params ["_AI"];
 	_AI addEventHandler ["GetInMan", {

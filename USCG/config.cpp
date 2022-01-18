@@ -4,39 +4,35 @@ class CfgFunctions
 	{
 		class functions
 		{
-			class aceInit
-			{
-				file="\USCG\functions\fn_aceInit.sqf";
-				postInit=1;
-			};
 			class helicopterInit
 			{
 				file="\USCG\functions\fn_helicopterInit.sqf";
 				postInit=1;
 			};
-			class H60JInit
-			{
-				file="\USCG\functions\fn_h60jInit.sqf";
-				postInit=1;
-			};
-			class dauphinInit
-			{
-				file="\USCG\functions\fn_dauphinInit.sqf";
-				postInit=1;
-			};
-			class mohawkInit
-			{
-				file="\USCG\functions\fn_mohawk.sqf";
-				postInit=1;
-			};
-			class bell_Init
-			{
-				file="\USCG\functions\fn_bell.sqf";
-				postInit=1;
-			};
 			class eventHandlers 
 			{
 				file="\USCG\functions\fn_eventHandlers.sqf";
+				postInit=1;
+			};
+			class commonFunctions
+			{
+				file="\USCG\functions\fn_commonFunctions.sqf";
+				postInit=1;
+			};
+			
+			class handleDialog
+			{
+				file="\USCG\functions\fn_handleDialog.sqf";
+				postInit=1;
+			};
+			class spawnHookSelection
+			{
+				file="\USCG\functions\fn_spawnHookSelection.sqf";
+				postInit=1;
+			};
+			class aceInit
+			{
+				file="\USCG\functions\fn_aceInit.sqf";
 				postInit=1;
 			};
 		};
@@ -45,7 +41,7 @@ class CfgFunctions
 
 class CfgPatches
 {
-	class MS_USCG
+	class USCG
 	{
 		units[] = {};
 		weapons[] = {};
@@ -59,34 +55,90 @@ class CfgPatches
 
 class cfgVehicles 
 {
-	class Boat_F;
-	class B_Boat_Transport_01_F;
-	class Rubber_duck_base_F;
-	class EventHandlers;
-	/*
-	class MS_CoastguardBasket: Rubber_duck_base_F
+	class Heli_Transport_01_base_F;
+	class vtx_H60_base : Heli_Transport_01_base_F 
 	{
-		class EventHandlers : EventHandlers 
+		class vxf_cargo
 		{
-			init = "(_this select 0) lockCargo [1, true]; (_this select 0) lockCargo [2, true]; (_this select 0) lockCargo [3, true]; (_this select 0) lockCargo [4, true]; (_this select 0) lockCargo [5, true];";
+			class interaction
+			{
+				class transferBasketHelicopter
+				{
+					condition = "hasDeployedBasket && ropeLength (ropes vehicle player select 0) <= 3";
+					positionType = "coordinates";
+					position[] = {0.719326,5.13598,-0.377507};
+					label = "Move Hoist Crew - Helicopter";
+					radius = 0.2;
+					buttonDown = "call mst_fnc_moveInAllOccupants";
+				};
+				class readDataPilot
+				{
+					clickSound = "vxf_Switch_Sound";
+					condition = "hasDeployedBasket";
+					positionType = "coordinates";
+					position[] = {0.719166,5.09165,-0.493864};
+					label = "Read Rescue Hoist Data";
+					radius = 0.2;
+					buttonDown = "call mst_fnc_getDataReadings";
+				};
+				class readDataCoPilot
+				{
+					clickSound = "vxf_Switch_Sound";
+					condition = "hasDeployedBasket";
+					positionType = "coordinates";
+					position[] = {-0.730867,5.09079,-0.491695};
+					label = "Read Hoist Data";
+					radius = 0.2;
+					buttonDown = "call mst_fnc_getDataReadings";
+				};
+				class deployHook
+				{
+					condition = "!hasDeployedBasket";
+					positionType = "coordinates";
+					position[] = {1.3946,2.03228,0.269152};
+					label = "Deploy Hoist";
+					radius = 0.3;
+					buttonDown = "call mst_fnc_deployHelicopterHookH60, call mst_fnc_handleRopeDetach";
+				};
+				class undeployHook
+				{
+					condition = "hasDeployedBasket && ropeLength (ropes vehicle player select 0) <= 3";
+					positionType = "coordinates";
+					position[] = {1.43148,2.02815,0.46699};
+					//position[] = {1.3946,2.03228,0.269152};
+					label = "Retrieve Hoist";
+					radius = 0.3;
+					buttonDown = "call mst_fnc_deleteBasket && vehicle player animateSource ['hoist_hook_hide', 0];";
+				};
+				class changeRopeLength
+				{
+					condition = "hasDeployedBasket";
+					positionType = "coordinates";
+					position[] = {1.06538,2.71681,-0.347432};
+					label = "Set Rope Length";
+					radius = 0.1;
+					buttonDown = "call mst_fnc_setRopeLength";
+				};
+				class transferToBasket
+				{
+					condition = "hasDeployedBasket && ropeLength (ropes vehicle player select 0) <= 3";
+					positionType = "coordinates";
+					position[] = {1.10092,1.61088,-1.22764};
+					label = "Move Onto Hoist";
+					radius = 0.2;
+					buttonDown = "call mst_fnc_moveIntoBasket";
+				};
+				class pickRescueEquipment
+				{
+					clickSound = "vxf_Switch_Sound";
+					condition = "!hasDeployedBasket";
+					positionType = "coordinates";
+					position[] = {1.06762,2.64015,-0.351893};
+					label = "Choose Rescue Equipment";
+					radius = 0.1;
+					buttonDown = "call mst_fnc_spawnHookSelectionMenu";
+				};
+			};
 		};
-		scope = 2;
-		scopeCurator = 2;
-		side = 1;
-		faction = "BLU_F";
-		displayName = "[MS] Coastguard Basket";  /// displayed in Editor
-		model = "\USCG\basket";/// simple path to model
-		picture = "\USCG\ms_logo.jpg"; /// just some icon in command bar
-		Icon = "\USCG\ms_logo.jpg"; /// icon in map
-		airCapacity = 9999999999999999999999;
-		driverAction = "Zodiac_Driver"; 	/// what action is going the driver take inside the vehicle. Non-existent action makes the vehicle inaccessible
-		cargoAction[] = {"Zodiac_Driver", "Zodiac_Driver", "Zodiac_Driver", "Zodiac_Driver"}; /// the same of all the crew
-		gunnerAction = {"Zodiac_Driver", "Zodiac_Driver", "Zodiac_Driver", "Zodiac_Driver"}; /// the same of all the crew
-		transportSoldier = 1; /// number of cargo except driver
-		ejectDeadDriver = true;			/// use this if you don't have proper dead pose for the driver, it will eject him from boat if he dies
-		simulation = "shipx";
-		maxSpeed = 75;
-		slingLoadCargoMemoryPoints[] = {"SlingLoadCargo1","SlingLoadCargo2","SlingLoadCargo3","SlingLoadCargo4"};
 	};
-	*/
 };

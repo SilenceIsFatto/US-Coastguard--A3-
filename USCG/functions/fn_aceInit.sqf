@@ -1,7 +1,11 @@
 // Variables (Defaults)
 inBasket = false;
 hasDeployedBasket = false;
-allowedVehicles = ["MS_CoastguardBasket", "MS_CoastguardBasketNew", "MS_Stretcher"];
+
+_allowedHooks =
+[
+	"MS_CoastguardBasketNew"
+];
 
 mst_fnc_swapBasketAnimation = {
 	[player, "amovpercmstpsnonwnondnon"] remoteExec ["switchMove"];
@@ -50,7 +54,7 @@ _action = ['basketWatch','Swap Animation - Watch','',{
 _action = ['basketInjured','Swap Animation - Injured','',{
 	call mst_fnc_swapBasketAnimationDead
 },
-{typeOf vehicle player in allowedVehicles}] call ace_interact_menu_fnc_createAction;
+{typeOf vehicle player == "MS_Stretcher"}] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions"], _action] call ace_interact_menu_fnc_addActionToObject;
 
 // This is for the baskets, to fix your animations! ^^
