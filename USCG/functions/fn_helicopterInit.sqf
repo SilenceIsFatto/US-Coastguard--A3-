@@ -4,7 +4,10 @@ mst_fnc_deployHelicopterBasketH60 = {
 	myRope = ropeCreate [vehicle player, [1.405, 2.03, 0.45], basket, [0,-0.2,1], 5, [], ["RopeEnd", [0,0,0]]];
 	titleText ["Ropes have been deployed, basket is ready!","PLAIN DOWN"];
 	hasDeployedBasket = true;
+	publicVariable "hasDeployedBasket";
+	publicVariable "basket";
 	vehicle player animateSource ['hoist_hook_hide', 1];
+	call mst_fnc_handleRopeDetach;
 };
 
 mst_fnc_deployHelicopterStretcherH60 = {
@@ -17,7 +20,9 @@ mst_fnc_deployHelicopterStretcherH60 = {
 	titleText ["Ropes have been deployed, stretcher is ready!","PLAIN DOWN"];
 	hasDeployedBasket = true;
 	publicVariable "hasDeployedBasket";
-	vehicle player animateSource ['hoist_hook_hide', 1];
+	publicVariable "basket";
+	vehicle player animateSource ['hoist_hook_hide', 1]; // hide hook
+	call mst_fnc_handleRopeDetach;
 };
 
 mst_fnc_deployHelicopterHookH60 = {
@@ -27,5 +32,9 @@ mst_fnc_deployHelicopterHookH60 = {
 	titleText ["Ropes have been deployed, harness is ready!","PLAIN DOWN"];
 	hasDeployedBasket = true;
 	publicVariable "hasDeployedBasket";
+	publicVariable "basket";
 	vehicle player animateSource ['hoist_hook_hide', 1];
+	call mst_fnc_handleRopeDetach;
+	
+	hint "get debugged lol"
 };

@@ -1,3 +1,14 @@
+class CfgPatches
+{
+	class USCG
+	{
+		units[] = {};
+		weapons[] = {};
+		requiredVersion = 0.1;
+		requiredAddons[] = {"A3_Characters_F", "cba_settings"};
+	};
+};
+
 class CfgFunctions
 {
 	class USCG
@@ -39,17 +50,6 @@ class CfgFunctions
 	};
 };
 
-class CfgPatches
-{
-	class USCG
-	{
-		units[] = {};
-		weapons[] = {};
-		requiredVersion = 0.1;
-		requiredAddons[] = {"A3_Characters_F", "cba_settings"};
-	};
-};
-
 #include "\USCG\dialogs\defines.hpp"
 #include "\USCG\dialogs\dialogs.hpp"
 
@@ -58,29 +58,10 @@ class cfgVehicles
 	class Heli_Transport_01_base_F;
 	class vtx_H60_base : Heli_Transport_01_base_F 
 	{
-		class vxf_cargo
+		class vxf_copilot
 		{
-			class interaction
+			class interaction 
 			{
-				class transferBasketHelicopter
-				{
-					condition = "hasDeployedBasket && ropeLength (ropes vehicle player select 0) <= 3";
-					positionType = "coordinates";
-					position[] = {0.719326,5.13598,-0.377507};
-					label = "Move Hoist Crew - Helicopter";
-					radius = 0.2;
-					buttonDown = "call mst_fnc_moveInAllOccupants";
-				};
-				class readDataPilot
-				{
-					clickSound = "vxf_Switch_Sound";
-					condition = "hasDeployedBasket";
-					positionType = "coordinates";
-					position[] = {0.719166,5.09165,-0.493864};
-					label = "Read Rescue Hoist Data";
-					radius = 0.2;
-					buttonDown = "call mst_fnc_getDataReadings";
-				};
 				class readDataCoPilot
 				{
 					clickSound = "vxf_Switch_Sound";
@@ -91,6 +72,55 @@ class cfgVehicles
 					radius = 0.2;
 					buttonDown = "call mst_fnc_getDataReadings";
 				};
+				class transferBasketHelicopter
+				{
+					condition = "ropeLength (ropes vxf_vehicle select 0) <= 3";
+					positionType = "coordinates";
+					position[] = {-0.0472,4.88146,-0.613526};
+					label = "Move Hoist Crew - Helicopter";
+					radius = 0.2;
+					buttonDown = "call mst_fnc_moveInAllOccupants";
+				};
+			};
+		};
+		class vxf_driver
+		{
+			class interaction
+			{
+				class transferBasketHelicopter
+				{
+					condition = "ropeLength (ropes vxf_vehicle select 0) <= 3";
+					positionType = "coordinates";
+					position[] = {-0.0472,4.88146,-0.613526};
+					label = "Move Hoist Crew - Helicopter";
+					radius = 0.2;
+					buttonDown = "call mst_fnc_moveInAllOccupants";
+				};
+				class setLengthPilot
+				{
+					condition = "hasDeployedBasket";
+					positionType = "coordinates";
+					position[] = {0.719166,5.09165,-0.493864};
+					label = "Set Rope Length";
+					radius = 0.2;
+					buttonDown = "call mst_fnc_setRopeLength";
+				};
+				class readDataPilot
+				{
+					clickSound = "vxf_Switch_Sound";
+					condition = "hasDeployedBasket";
+					positionType = "coordinates";
+					position[] = {0.720362,5.1483,-0.357264};
+					label = "Read Rescue Hoist Data";
+					radius = 0.2;
+					buttonDown = "call mst_fnc_getDataReadings";
+				};
+			};
+		};
+		class vxf_cargo
+		{
+			class interaction
+			{
 				class deployHook
 				{
 					condition = "!hasDeployedBasket";
@@ -98,11 +128,20 @@ class cfgVehicles
 					position[] = {1.3946,2.03228,0.269152};
 					label = "Deploy Hoist";
 					radius = 0.3;
-					buttonDown = "call mst_fnc_deployHelicopterHookH60, call mst_fnc_handleRopeDetach";
+					buttonDown = "call mst_fnc_deployHelicopterHookH60";
+				};
+				class getOutDiver
+				{
+					condition = "";
+					positionType = "coordinates";
+					position[] = {-1.08656,1.74033,-1.22008};
+					label = "Jump Into Water";
+					radius = 0.3;
+					buttonDown = "call mst_fnc_handleEject, player action ['Eject', vehicle player];";
 				};
 				class undeployHook
 				{
-					condition = "hasDeployedBasket && ropeLength (ropes vehicle player select 0) <= 3";
+					condition = "hasDeployedBasket";
 					positionType = "coordinates";
 					position[] = {1.43148,2.02815,0.46699};
 					//position[] = {1.3946,2.03228,0.269152};
@@ -114,18 +153,18 @@ class cfgVehicles
 				{
 					condition = "hasDeployedBasket";
 					positionType = "coordinates";
-					position[] = {1.06538,2.71681,-0.347432};
-					label = "Set Rope Length";
+					position[] = {1.08116,1.73473,-1.22022};
+					label = "Set Rope Length (WIP, may only work for pilot)";
 					radius = 0.1;
 					buttonDown = "call mst_fnc_setRopeLength";
 				};
 				class transferToBasket
 				{
-					condition = "hasDeployedBasket && ropeLength (ropes vehicle player select 0) <= 3";
+					condition = "ropeLength (ropes vxf_vehicle select 0) <= 3";
 					positionType = "coordinates";
-					position[] = {1.10092,1.61088,-1.22764};
+					position[] = {1.10092,1.61088,-1.22022};
 					label = "Move Onto Hoist";
-					radius = 0.2;
+					radius = 0.1;
 					buttonDown = "call mst_fnc_moveIntoBasket";
 				};
 				class pickRescueEquipment
@@ -133,7 +172,7 @@ class cfgVehicles
 					clickSound = "vxf_Switch_Sound";
 					condition = "!hasDeployedBasket";
 					positionType = "coordinates";
-					position[] = {1.06762,2.64015,-0.351893};
+					position[] = {1.10091,1.48053,-1.22022};
 					label = "Choose Rescue Equipment";
 					radius = 0.1;
 					buttonDown = "call mst_fnc_spawnHookSelectionMenu";

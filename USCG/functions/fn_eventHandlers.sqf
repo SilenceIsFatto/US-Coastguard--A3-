@@ -1,17 +1,3 @@
-mst_fnc_handleRopeDetach = {
-	_heli = nearestObjects [player, ["Air"], 2] select 0;
-	vehicle player addEventHandler ["RopeBreak",{
-		params ["_object1", "_rope", "_object2"];
-		{
-			ropeDestroy _x;
-		} forEach ropes vehicle player;
-		deleteVehicle basket;
-		hasDeployedBasket = false;
-		publicVariable "hasDeployedBasket";
-		vehicle player animateSource ['hoist_hook_hide', 0];
-	}];
-};
-
 mst_fnc_addUSCGEH = {
 	params ["_AI"];
 	_AI addEventHandler ["GetInMan", {
@@ -41,3 +27,28 @@ addMissionEventHandler ["GroupCreated", {
     };
 }];
 
+mst_fnc_handleRopeDetach = {
+	_heli = nearestObjects [player, ["Air"], 2] select 0;
+	vxf_vehicle addEventHandler ["RopeBreak",{
+		params ["_object1", "_rope", "_object2"];
+		{
+			ropeDestroy _x;
+		} forEach ropes vxf_vehicle;
+		deleteVehicle basket;
+		hasDeployedBasket = false;
+		publicVariable "hasDeployedBasket";
+		vxf_vehicle animateSource ['hoist_hook_hide', 0]; // unhide hook
+	}];
+};
+
+mst_fnc_handleEject = {
+	player addEventHandler ["GetOutMan", { 
+		params ["_unit", "_role", "_vehicle", "_turret"];
+		ply = _unit;
+		ply switchMove "GetOutHeli_Light_01bench";
+		ply removeEventHandler ["GetOutMan", _thisEventHandler];
+		[] spawn {sleep 1.2,
+			ply switchMove "AswmPercMstpSnonWnonDnon"; 
+		}; 
+	}];
+};

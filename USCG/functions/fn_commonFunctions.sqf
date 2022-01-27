@@ -14,8 +14,8 @@ mst_fnc_getDataReadings = {
 	_x = _objPosition select 0;
 	_y = _objPosition select 1;
 
-	_meters = vehicle player distance [_x,_y,0];
-	hint format ["This helicopter is approximately %1m away from the ground. \n \n \n This helicopter currently has %2 people in the basket. \n \n \n The ropes length is approximately %3.",_meters, count crew basket, ropeLength (ropes vehicle player select 0)];
+	_meters = vxf_vehicle distance [_x,_y,0];
+	hint format ["This helicopter is approximately %1m away from the ground. \n \n \n This helicopter currently has %2 people in the basket. \n \n \n The ropes length is approximately %3.",_meters, count crew basket, ropeLength (ropes vxf_vehicle select 0)];
 };
 
 mst_fnc_setRopeLength = {
@@ -30,7 +30,7 @@ mst_fnc_spawnHookSelectionMenu = {
 mst_fnc_deleteBasket = {
 	{
 		ropeDestroy _x;
-	} forEach ropes vehicle player;
+	} forEach ropes vxf_vehicle;
 	deleteVehicle basket;
 	titleText ["Equipment has been unhooked!","PLAIN DOWN"];
 	hasDeployedBasket = false;
@@ -51,24 +51,17 @@ mst_fnc_moveIntoBasket = {
 
 mst_fnc_moveInAllOccupants = {
 	{
-		_x moveInAny vehicle player;
+		_x moveInAny vxf_vehicle;
 	} forEach crew basket;
 	titleText ["Crew Of Basket Is Secure!","PLAIN DOWN"];
 };
 
 mst_fnc_changeRopeLength = {
-	detach basket;
 	_ropeDistance = player getVariable "ropeDistance";
 	hint _ropeDistance;
 	{
 		ropeUnwind [_x, 6, parseNumber _ropeDistance];
-	} forEach ropes vehicle player;
+	} forEach ropes vxf_vehicle;
 	titleText ["Ropes have been lengthened!","PLAIN DOWN"];
-	basket setDir (getDir vehicle player);
-	/*
-	if (parseNumber _ropeDistance == 0 && typeOf basket == "vtx_hook") then {
-		waitUntil {ropeLength (ropes vehicle player select 0) == 0};
-		basket attachTo [vehicle player];
-	};
-	*/
+	basket setDir (getDir vxf_vehicle);
 };

@@ -1,7 +1,3 @@
-// Variables (Defaults)
-inBasket = false;
-hasDeployedBasket = false;
-
 _allowedHooks =
 [
 	"MS_CoastguardBasketNew"
