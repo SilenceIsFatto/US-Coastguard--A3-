@@ -1,5 +1,5 @@
 mst_fnc_deployHelicopterBasketH60 = {
-	basket = "MS_CoastguardBasketNew" createVehicle position player;
+	basket = "MS_CoastguardBasketV3" createVehicle position player;
 	basket setPos (vehicle player modelToWorld [3,2, -1]);
 	myRope = ropeCreate [vehicle player, [1.405, 2.03, 0.45], basket, [0,-0.2,1], 5, [], ["RopeEnd", [0,0,0]]];
 	titleText ["Ropes have been deployed, basket is ready!","PLAIN DOWN"];

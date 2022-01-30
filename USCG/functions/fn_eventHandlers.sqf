@@ -5,7 +5,7 @@ mst_fnc_addUSCGEH = {
 		if (typeOf _vehicle == "MS_Stretcher") then {
 			[_unit, "hubwoundedprone_idle2"] remoteExec ["switchMove"];
 		};
-		if (typeOf _vehicle == "MS_CoastguardBasketNew") then {
+		if (typeOf _vehicle == "MS_CoastguardBasketV3") then {
 			[_unit, "acts_civilhiding_1"] remoteExec ["switchMove"];
 		};
 	}];
