@@ -56,6 +56,26 @@ class CfgFunctions
 class cfgVehicles 
 {
 	class Heli_Transport_01_base_F;
+	class vtx_hook_base;
+	class vtx_hook : vtx_hook_base
+	{
+		class vxf_cargo
+		{
+			class interaction
+			{
+				class moveToHelicopter
+				{
+					clickSound = "vxf_Switch_Sound";
+					condition = "";
+					positionType = "coordinates";
+					position[] = {0,1,0};
+					label = "Move Back To Helicopter";
+					radius = 0.5;
+					buttonDown = "call mst_fnc_moveToHelicopter";
+				};
+			};
+		};
+	};
 	class vtx_H60_base : Heli_Transport_01_base_F 
 	{
 		class vxf_copilot
@@ -78,7 +98,7 @@ class cfgVehicles
 					positionType = "coordinates";
 					position[] = {-0.0472,4.88146,-0.613526};
 					label = "Move Hoist Crew - Helicopter";
-					radius = 0.2;
+					radius = 0.1;
 					buttonDown = "call mst_fnc_moveInAllOccupants";
 				};
 			};
@@ -93,7 +113,7 @@ class cfgVehicles
 					positionType = "coordinates";
 					position[] = {-0.0472,4.88146,-0.613526};
 					label = "Move Hoist Crew - Helicopter";
-					radius = 0.2;
+					radius = 0.1;
 					buttonDown = "call mst_fnc_moveInAllOccupants";
 				};
 				class setLengthPilot
@@ -153,7 +173,7 @@ class cfgVehicles
 				{
 					condition = "hasDeployedBasket";
 					positionType = "coordinates";
-					position[] = {1.08116,1.73473,-1.22022};
+					position[] = {1.04544,2.62412,-0.248061};
 					label = "Set Rope Length (WIP, may only work for pilot)";
 					radius = 0.1;
 					buttonDown = "call mst_fnc_setRopeLength";
@@ -162,7 +182,7 @@ class cfgVehicles
 				{
 					condition = "ropeLength (ropes vxf_vehicle select 0) <= 3";
 					positionType = "coordinates";
-					position[] = {1.10092,1.61088,-1.22022};
+					position[] = {1.66, 1.585,-0.3};
 					label = "Move Onto Hoist";
 					radius = 0.1;
 					buttonDown = "call mst_fnc_moveIntoBasket";
@@ -172,7 +192,7 @@ class cfgVehicles
 					clickSound = "vxf_Switch_Sound";
 					condition = "!hasDeployedBasket";
 					positionType = "coordinates";
-					position[] = {1.10091,1.48053,-1.22022};
+					position[] = {1.04227,2.76631,-0.246649};
 					label = "Choose Rescue Equipment";
 					radius = 0.1;
 					buttonDown = "call mst_fnc_spawnHookSelectionMenu";

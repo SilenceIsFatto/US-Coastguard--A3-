@@ -2,7 +2,7 @@ class CfgPatches
 {
 	class MS_USCG_Vehicles
 	{
-		units[] = {"MS_CoastguardBasketNew"};
+		units[] = {"MS_CoastguardBasketV3"};
 		weapons[] = {};
 		requiredVersion = 0.1;
 		requiredAddons[] = {"A3_Characters_F"};

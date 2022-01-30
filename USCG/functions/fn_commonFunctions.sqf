@@ -46,21 +46,26 @@ mst_fnc_moveIntoBasket = {
 		hint "The rescue basket is not close enough, or non-existent.";
 	};
 	*/
+	uscgheli = vehicle player;
 	player moveInAny basket;
 };
 
 mst_fnc_moveInAllOccupants = {
 	{
-		_x moveInAny vxf_vehicle;
+		_x moveInCargo vxf_vehicle;
 	} forEach crew basket;
 	titleText ["Crew Of Basket Is Secure!","PLAIN DOWN"];
+};
+
+mst_fnc_moveToHelicopter = {
+	player moveInCargo uscgheli;
 };
 
 mst_fnc_changeRopeLength = {
 	_ropeDistance = player getVariable "ropeDistance";
 	hint _ropeDistance;
 	{
-		ropeUnwind [_x, 6, parseNumber _ropeDistance];
+		ropeUnwind [_x, 4, parseNumber _ropeDistance];
 	} forEach ropes vxf_vehicle;
 	titleText ["Ropes have been lengthened!","PLAIN DOWN"];
 	basket setDir (getDir vxf_vehicle);

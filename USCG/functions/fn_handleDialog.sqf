@@ -1,6 +1,6 @@
 _allowedHooks =
 [
-	"MS_CoastguardBasketNew", 
+	"MS_CoastguardBasketV3", 
 	"MS_Stretcher",
 	"vtx_hook"
 ];

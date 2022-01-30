@@ -5,7 +5,7 @@ _hook = lbData [2200, _index];
 
 switch (_hook) do 
 {
-	case "MS_CoastguardBasketNew": {[] call mst_fnc_deployHelicopterBasketH60};
+	case "MS_CoastguardBasketV3": {[] call mst_fnc_deployHelicopterBasketH60};
 	
 	case "MS_Stretcher": {[] call mst_fnc_deployHelicopterStretcherH60};
 	
