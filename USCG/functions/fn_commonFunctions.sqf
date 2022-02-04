@@ -52,13 +52,13 @@ mst_fnc_moveIntoBasket = {
 
 mst_fnc_moveInAllOccupants = {
 	{
-		_x moveInCargo vxf_vehicle;
+		_x moveInAny vxf_vehicle;
 	} forEach crew basket;
 	titleText ["Crew Of Basket Is Secure!","PLAIN DOWN"];
 };
 
 mst_fnc_moveToHelicopter = {
-	player moveInCargo uscgheli;
+	player moveInAny uscgheli;
 };
 
 mst_fnc_changeRopeLength = {
