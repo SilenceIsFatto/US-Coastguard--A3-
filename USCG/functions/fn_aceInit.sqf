@@ -1,9 +1,4 @@
-// outdated
-
-_allowedHooks =
-[
-	"MS_CoastguardBasketNew"
-];
+// deprecated - what did I do here, it worked flawlessly...
 
 mst_fnc_swapBasketAnimation = {
 	[player, "amovpercmstpsnonwnondnon"] remoteExec ["switchMove"];

@@ -83,7 +83,7 @@ class uscg_hookSelection
 			colorText[] = {1,-1,-1,1};
 			colorBackground[] = {-1,-1,-1,1};
 			colorActive[] = {1,-1,-1,0.5};
-			action = "[] call USCG_fnc_spawnHookSelection";
+			action = "[] call USCG_mod_fnc_spawnHookSelection";
 			sizeEx = 1.8 * GUI_GRID_H;
 		};
 
@@ -142,7 +142,7 @@ class uscg_RopeMeter
 			y = 0.511 * safezoneH + safezoneY;
 			w = 0.144375 * safezoneW;
 			h = 0.055 * safezoneH;
-			action = "execVM '\USCG\functions\fn_checkRopeLength.sqf' ";
+			onButtonClick = "_rope = ctrlText 1100; [_rope] call uscg_mod_fnc_setRopeLength";
 			colorText[] = {0.7,0,0,1};
 			colorBackground[] = {0,0,0,0};
 			colorActive[] = {0,0,0,0};
