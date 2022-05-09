@@ -4,6 +4,16 @@ hasDeployedStretcher = false;
 hasDeployedHook = false;
 hasDetachedStretcher = false;
 
+_fnc_makeCarrayble = { 
+    params ["_object"]; 
+	[_object, true, [0,1.5,0.5], 0 ] call ace_dragging_fnc_setDraggable;
+	[_object, true, [0,1.5,0.5], 0] call ace_dragging_fnc_setCarryable;
+};
+["MS_Stretcher_V3", "init", _fnc_makeCarrayble, true, [], true] call CBA_fnc_addClassEventHandler; 
+
+// [vehicle player, true, [0,1.5,0.5], 0] call ace_dragging_fnc_setCarryable;
+// [vehicle player, true, [0,1.5,0.5], 0 ] call ace_dragging_fnc_setDraggable;
+
 _allowedHooks =
 [
 	"MS_CoastguardBasketNew", 

@@ -39,7 +39,8 @@ class CfgMovesMaleSdr: CfgMovesBasic
 	};
 };
 
-
+//External Ref from CBA XEH:
+class CBA_Extended_EventHandlers;
 
 class cfgVehicles 
 {
@@ -51,6 +52,7 @@ class cfgVehicles
 	{
 		class EventHandlers : EventHandlers 
 		{
+			class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers {};
 			init = "(_this select 0) lockCargo [0, true]; (_this select 0) lockCargo [1, true]; (_this select 0) lockCargo [2, true]; (_this select 0) lockCargo [3, true]; (_this select 0) lockCargo [4, false]; (_this select 0) lockCargo [5, true];";
 		};
 		scope = 2;
@@ -81,11 +83,18 @@ class cfgVehicles
 	{
 		class EventHandlers : EventHandlers 
 		{
+			class CBA_Extended_EventHandlers: CBA_Extended_EventHandlers {};
 			init = "(_this select 0) lockCargo [0, true]; (_this select 0) lockCargo [1, true]; (_this select 0) lockCargo [2, true]; (_this select 0) lockCargo [3, true]; (_this select 0) lockCargo [4, false]; (_this select 0) lockCargo [5, true];";
 		};
 		scope = 2;
 		scopeCurator = 2;
 		side = 1;
+		ace_dragging_canCarry = 1;
+		ace_dragging_canDrag = 1;
+		ace_dragging_carryDirection = 90;
+		ace_dragging_carryPosition[] = {0,1,0};
+		ace_dragging_dragDirection = 90;
+		ace_dragging_dragPosition[] = {0,1,0};
 		faction = "BLU_F";
 		displayName = "Stretcher (USCG/V3)";
 		model = "\USCG_Vehicles_Stretcher\stretcherv3";
