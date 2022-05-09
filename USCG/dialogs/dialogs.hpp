@@ -142,7 +142,7 @@ class uscg_RopeMeter
 			y = 0.511 * safezoneH + safezoneY;
 			w = 0.144375 * safezoneW;
 			h = 0.055 * safezoneH;
-			onButtonClick = "_rope = ctrlText 1100; [_rope] call uscg_mod_fnc_setRopeLength";
+			action = "[] call uscg_mod_fnc_getRopeLength";
 			colorText[] = {0.7,0,0,1};
 			colorBackground[] = {0,0,0,0};
 			colorActive[] = {0,0,0,0};

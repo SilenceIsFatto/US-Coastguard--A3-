@@ -2,6 +2,7 @@
 hasDeployedBasket = false;
 hasDeployedStretcher = false;
 hasDeployedHook = false;
+hasDetachedStretcher = false;
 
 _allowedHooks =
 [
@@ -17,7 +18,7 @@ mst_fnc_spawnHookSelectionMenu = {
 
 mst_fnc_moveIntoBasket = {
 	uscgheli = vehicle player;
-	player moveInAny currentVehicle;
+	player moveInAny hook;
 };
 
 mst_fnc_moveInAllOccupants = {

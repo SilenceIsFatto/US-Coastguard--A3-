@@ -1,23 +1,37 @@
-// deprecated - what did I do here, it worked flawlessly...
+_actionInfo = [
+	"detachStretcher",  // 0: Action name <STRING>
+	"Detach Stretcher",                  // 1: Name of the action shown in the menu <STRING>
+	"",                                 // 2: Icon <STRING>
+	// Statement <CODE>
+	{
+		params ["_target", "_player", "_params"];
+		[] call mst_fnc_detachStretcher;
+	},
+	// Condition <CODE>
+	{ 
+		params ["_target", "_player", "_params"];
+		(!hasDetachedStretcher) && {hasDeployedStretcher}
+	}
+];
 
-mst_fnc_swapBasketAnimation = {
-	[player, "amovpercmstpsnonwnondnon"] remoteExec ["switchMove"];
-};
+_action = _actionInfo call ace_interact_menu_fnc_createAction;
+["vtx_hook", 0, [], _action, true] call ace_interact_menu_fnc_addActionToClass;
 
-mst_fnc_swapBasketAnimationKneel = {
-	[player, "amovpknlmstpsnonwnondnon"] remoteExec ["switchMove"]; // Swap their animation to this one
-};
+_actionInfo = [
+	"attachStretcher",  // 0: Action name <STRING>
+	"Attach Stretcher",                  // 1: Name of the action shown in the menu <STRING>
+	"",                                 // 2: Icon <STRING>
+	// Statement <CODE>
+	{
+		params ["_target", "_player", "_params"];
+		[] call mst_fnc_attachStretcher;
+	},
+	// Condition <CODE>
+	{ 
+		params ["_target", "_player", "_params"];
+		(hasDetachedStretcher) && {hasDeployedStretcher} && {hook distance stretcher_hook <= 6}
+	}
+];
 
-mst_fnc_swapBasketAnimationBrace = {
-	[player, "acts_civilhiding_1"] remoteExec ["switchMove"];
-};
-
-mst_fnc_swapBasketAnimationStand = {
-	[player, "acts_briefing_sa_startloop"] remoteExec ["switchMove"];
-};
-
-mst_fnc_swapBasketAnimationDead = {
-	[player, "hubwoundedprone_idle2"] remoteExec ["switchMove"];
-};
-
-// This is for the baskets, to fix your animations! ^^
+_action = _actionInfo call ace_interact_menu_fnc_createAction;
+["vtx_hook", 0, [], _action, true] call ace_interact_menu_fnc_addActionToClass;

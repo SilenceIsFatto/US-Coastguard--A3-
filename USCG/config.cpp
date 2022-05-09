@@ -69,6 +69,11 @@ class CfgFunctions
 				file="\USCG\functions\fn_deleteHook.sqf";
 				postInit=0;
 			};
+			class getRopeLength
+			{
+				file="\USCG\functions\fn_getRopeLength.sqf";
+				postInit=0;
+			};
 			
 		};
 	};
@@ -81,6 +86,7 @@ class cfgVehicles
 {
 	class Heli_Transport_01_base_F;
 	class vtx_hook_base;
+	/*
 	class vtx_hook : vtx_hook_base
 	{
 		class vxf_cargo
@@ -100,6 +106,7 @@ class cfgVehicles
 			};
 		};
 	};
+	*/
 	class vtx_H60_base : Heli_Transport_01_base_F 
 	{
 		class vxf_copilot
@@ -204,7 +211,7 @@ class cfgVehicles
 				};
 				class transferToBasket
 				{
-					condition = "ropeLength (ropes vxf_vehicle select 0) <= 3";
+					condition = "ropeLength (ropes vehicle player select 0) <= 3";
 					positionType = "coordinates";
 					position[] = {1.66, 1.585,-0.3};
 					label = "Move Onto Hoist";

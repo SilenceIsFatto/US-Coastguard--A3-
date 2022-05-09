@@ -3,7 +3,10 @@ mst_fnc_addUSCGEH = {
 	_AI addEventHandler ["GetInMan", {
 		params ["_unit", "_role", "_vehicle", "_turret"];
 		if (typeOf _vehicle == "MS_Stretcher") then {
-			[_unit, "hubwoundedprone_idle2"] remoteExec ["switchMove"];
+			[_unit, "USCG_anim_stretcher"] remoteExec ["switchMove"];
+		};
+		if (typeOf _vehicle == "MS_Stretcher_V3") then {
+			[_unit, "USCG_anim_stretcher"] remoteExec ["switchMove"];
 		};
 		if (typeOf _vehicle == "MS_CoastguardBasketV3") then {
 			[_unit, "acts_civilhiding_1"] remoteExec ["switchMove"];
@@ -45,10 +48,10 @@ mst_fnc_handleEject = {
 	player addEventHandler ["GetOutMan", { 
 		params ["_unit", "_role", "_vehicle", "_turret"];
 		ply = _unit;
-		ply switchMove "GetOutHeli_Light_01bench";
+		[ply, "GetOutHeli_Light_01bench"] remoteExec ["switchMove"];
 		ply removeEventHandler ["GetOutMan", _thisEventHandler];
 		[] spawn {sleep 1.2,
-			ply switchMove "AswmPercMstpSnonWnonDnon"; 
+			[ply, "AswmPercMstpSnonWnonDnon"] remoteExec ["switchMove"];
 		}; 
 	}];
 };
