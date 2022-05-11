@@ -1,6 +1,6 @@
 class CfgPatches
 {
-	class MS_USCG_Vehicles_Stretcher
+	class USCG_Stretcher
 	{
 		units[] = {"MS_Stretcher", "MS_Stretcher_V3"};
 		weapons[] = {};

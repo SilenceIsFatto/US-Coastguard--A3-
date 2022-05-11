@@ -41,7 +41,7 @@ class cfgVehicles
 					position[] = {0.186051,5.0142,-1.30048};
 					label = "Read Hoist Data";
 					radius = 0.2;
-					buttonDown = "call mst_fnc_getDataReadings";
+					buttonDown = "[player] call uscg_mod_fnc_getDataReadings";
 				};
 				class transferBasketHelicopter
 				{
@@ -50,7 +50,7 @@ class cfgVehicles
 					position[] = {-0.0553411,5.10352,-1.03599};
 					label = "Move Hoist Crew - Helicopter";
 					radius = 0.1;
-					buttonDown = "call mst_fnc_moveInAllOccupants";
+					buttonDown = "[hook] call uscg_mod_fnc_moveInAllOccupants";
 				};
 			};
 		};
@@ -65,7 +65,7 @@ class cfgVehicles
 					position[] = {-0.0553411,5.10352,-1.03599};
 					label = "Move Hoist Crew - Helicopter";
 					radius = 0.1;
-					buttonDown = "call mst_fnc_moveInAllOccupants";
+					buttonDown = "[hook] call uscg_mod_fnc_moveInAllOccupants";
 				};
 				class setLengthPilot
 				{
@@ -74,7 +74,7 @@ class cfgVehicles
 					position[] = {0.550992,4.50562,-1.16447};
 					label = "Set Rope Length";
 					radius = 0.2;
-					buttonDown = "call mst_fnc_setRopeLength";
+					buttonDown = " createDialog 'uscg_RopeMeter' ";
 				};
 				class readDataPilot
 				{
@@ -84,7 +84,7 @@ class cfgVehicles
 					position[] = {0.186051,5.0142,-1.30048};
 					label = "Read Rescue Hoist Data";
 					radius = 0.2;
-					buttonDown = "call mst_fnc_getDataReadings";
+					buttonDown = "[player] call uscg_mod_fnc_getDataReadings";
 				};
 			};
 		};
@@ -118,7 +118,7 @@ class cfgVehicles
 					//position[] = {1.3946,2.03228,0.269152};
 					label = "Retrieve Hoist";
 					radius = 0.3;
-					buttonDown = "call mst_fnc_deleteBasket";
+					buttonDown = "[hook] call uscg_mod_fnc_deleteHook && vehicle player animateSource ['ems', 0];";
 				};
 				class transferToBasket
 				{
@@ -127,7 +127,7 @@ class cfgVehicles
 					position[] = {1.16947,2.59366,-1.82843};
 					label = "Move Onto Hoist";
 					radius = 0.1;
-					buttonDown = "call mst_fnc_moveIntoBasket";
+					buttonDown = "[] call mst_fnc_moveIntoBasket";
 				};
 				/*
 				class pickRescueEquipment

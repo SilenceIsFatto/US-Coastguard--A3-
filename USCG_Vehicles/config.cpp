@@ -1,6 +1,6 @@
 class CfgPatches
 {
-	class MS_USCG_Vehicles
+	class USCG_Basket
 	{
 		units[] = {"MS_CoastguardBasketV3"};
 		weapons[] = {};
