@@ -36,7 +36,7 @@ class cfgVehicles
 				class readDataCoPilot
 				{
 					clickSound = "vxf_Switch_Sound";
-					condition = "hasDeployedBasket";
+					condition = "hasDeployedHook";
 					positionType = "coordinates";
 					position[] = {0.186051,5.0142,-1.30048};
 					label = "Read Hoist Data";
@@ -45,7 +45,7 @@ class cfgVehicles
 				};
 				class transferBasketHelicopter
 				{
-					condition = "ropeLength (ropes vxf_vehicle select 0) <= 3";
+					condition = "ropeLength (ropes vehicle player select 0) <= 3";
 					positionType = "coordinates";
 					position[] = {-0.0553411,5.10352,-1.03599};
 					label = "Move Hoist Crew - Helicopter";
@@ -60,7 +60,7 @@ class cfgVehicles
 			{
 				class transferBasketHelicopter
 				{
-					condition = "ropeLength (ropes vxf_vehicle select 0) <= 3";
+					condition = "ropeLength (ropes vehicle player select 0) <= 3";
 					positionType = "coordinates";
 					position[] = {-0.0553411,5.10352,-1.03599};
 					label = "Move Hoist Crew - Helicopter";
@@ -69,7 +69,7 @@ class cfgVehicles
 				};
 				class setLengthPilot
 				{
-					condition = "hasDeployedBasket";
+					condition = "hasDeployedHook";
 					positionType = "coordinates";
 					position[] = {0.550992,4.50562,-1.16447};
 					label = "Set Rope Length";
@@ -79,7 +79,7 @@ class cfgVehicles
 				class readDataPilot
 				{
 					clickSound = "vxf_Switch_Sound";
-					condition = "hasDeployedBasket";
+					condition = "hasDeployedHook";
 					positionType = "coordinates";
 					position[] = {0.186051,5.0142,-1.30048};
 					label = "Read Rescue Hoist Data";
@@ -94,12 +94,12 @@ class cfgVehicles
 			{
 				class deployHook
 				{
-					condition = "!hasDeployedBasket";
+					condition = "!hasDeployedHook";
 					positionType = "coordinates";
 					position[] = {1.50174,3.97061,-0.20901};
 					label = "Deploy Hoist";
 					radius = 0.3;
-					buttonDown = "call mst_fnc_deployHelicopterHookDauphin";
+					buttonDown = "[] call mst_fnc_deployHelicopterHookDauphin";
 				};
 				class getOutDiver
 				{
@@ -112,7 +112,7 @@ class cfgVehicles
 				};
 				class undeployHook
 				{
-					condition = "hasDeployedBasket";
+					condition = "hasDeployedHook";
 					positionType = "coordinates";
 					position[] = {1.50174,3.97061,-0.20901};
 					//position[] = {1.3946,2.03228,0.269152};
@@ -122,25 +122,23 @@ class cfgVehicles
 				};
 				class transferToBasket
 				{
-					condition = "ropeLength (ropes vxf_vehicle select 0) <= 3";
+					condition = "ropeLength (ropes vehicle player select 0) <= 3";
 					positionType = "coordinates";
 					position[] = {1.16947,2.59366,-1.82843};
 					label = "Move Onto Hoist";
 					radius = 0.1;
 					buttonDown = "[] call mst_fnc_moveIntoBasket";
 				};
-				/*
 				class pickRescueEquipment
 				{
 					clickSound = "vxf_Switch_Sound";
-					condition = "!hasDeployedBasket";
+					condition = "!hasDeployedHook";
 					positionType = "coordinates";
 					position[] = {1.16947,2.59366,-1.82843};
 					label = "Choose Rescue Equipment";
 					radius = 0.1;
 					buttonDown = "call mst_fnc_spawnHookSelectionMenu";
 				};
-				*/
 			};
 		};
 	};

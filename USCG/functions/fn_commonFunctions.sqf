@@ -11,12 +11,9 @@ _fnc_makeCarrayble = {
 };
 ["MS_Stretcher_V3", "init", _fnc_makeCarrayble, true, [], true] call CBA_fnc_addClassEventHandler; 
 
-// [vehicle player, true, [0,1.5,0.5], 0] call ace_dragging_fnc_setCarryable;
-// [vehicle player, true, [0,1.5,0.5], 0 ] call ace_dragging_fnc_setDraggable;
-
 _allowedHooks =
 [
-	"MS_CoastguardBasketNew", 
+	//"MS_CoastguardBasketNew", 
 	"MS_Stretcher",
 	"vtx_hook"
 ];

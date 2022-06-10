@@ -31,16 +31,23 @@ addMissionEventHandler ["GroupCreated", {
 }];
 
 mst_fnc_handleRopeDetach = {
-	_heli = nearestObjects [player, ["Air"], 2] select 0;
-	vxf_vehicle addEventHandler ["RopeBreak",{
+	params ["_heli"];
+	_heli addEventHandler ["RopeBreak",{
 		params ["_object1", "_rope", "_object2"];
 		{
 			ropeDestroy _x;
-		} forEach ropes vxf_vehicle;
-		deleteVehicle basket;
-		hasDeployedBasket = false;
-		publicVariable "hasDeployedBasket";
-		vxf_vehicle animateSource ['hoist_hook_hide', 0]; // unhide hook
+		} forEach ropes _heli;
+		deleteVehicle hook;
+		hasDeployedHook = false;
+		publicVariable "hasDeployedHook";
+		hookDeployed = false;
+		publicVariable "hookDeployed";
+		_heli animateSource ['hoist_hook_hide', 0]; // unhide hook
+		if (hasDeployedStretcher) then {
+			deleteVehicle stretcher_hook;
+			hasDeployedStretcher = false;
+			publicVariable "hasDeployedStretcher";
+		};
 	}];
 };
 

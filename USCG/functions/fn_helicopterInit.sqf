@@ -7,7 +7,7 @@ mst_fnc_deployHelicopterBasketH60 = {
 	publicVariable "hasDeployedBasket";
 	publicVariable "basket";
 	vehicle player animateSource ['hoist_hook_hide', 1];
-	call mst_fnc_handleRopeDetach;
+	[vehicle player] call mst_fnc_handleRopeDetach;
 	hookDeployed = true;
 	publicVariable "hookDeployed";
 };
@@ -38,7 +38,7 @@ mst_fnc_deployHelicopterHookH60 = {
 	hasDeployedHook = true;  
 	publicVariable "hasDeployedHook";  
 	vehicle player animateSource ['hoist_hook_hide', 1];  
-	call mst_fnc_handleRopeDetach;  
+	[vehicle player] call mst_fnc_handleRopeDetach;
 
 	hookDeployed = true;  
 	publicVariable "hookDeployed"; 
@@ -58,7 +58,7 @@ mst_fnc_deployHelicopterStretcherWithHookH60 = {
 	hasDeployedStretcher = true;
 	publicVariable "hasDeployedStretcher";
 	publicVariable "stretcher_hook";
-	call mst_fnc_handleRopeDetach;
+	[vehicle player] call mst_fnc_handleRopeDetach;
 };
 
 mst_fnc_detachStretcher = {
