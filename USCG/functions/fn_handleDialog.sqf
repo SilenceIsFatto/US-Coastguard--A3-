@@ -1,6 +1,7 @@
 _allowedHooks =
 [
 	"MS_Stretcher",
+	"USCG_RescueBasket",
 	"vtx_hook"
 ];
 

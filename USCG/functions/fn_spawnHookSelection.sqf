@@ -34,9 +34,11 @@ if ("jayhawk" in typeOf vehicle player) then {
 
 	switch (_hook) do 
 	{
-		case "MS_Stretcher": {[] call mst_fnc_deployHelicopterStretcherWithHookJayhawk};
+		case "USCG_RescueBasket": {[] call uscg_jayhawkrescue_fnc_deployBasket};
+	
+		case "MS_Stretcher": {[] call uscg_jayhawkrescue_fnc_deployStretcher};
 		
-		case "vtx_hook": {[] call mst_fnc_deployHelicopterHookJayhawk};
+		case "vtx_hook": {[] call uscg_jayhawkrescue_fnc_deployHook};
 	};
 
 };

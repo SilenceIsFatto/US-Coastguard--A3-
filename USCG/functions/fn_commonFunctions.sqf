@@ -13,7 +13,7 @@ _fnc_makeCarrayble = {
 
 _allowedHooks =
 [
-	//"MS_CoastguardBasketNew", 
+	"USCG_RescueBasket", 
 	"MS_Stretcher",
 	"vtx_hook"
 ];
@@ -26,13 +26,6 @@ mst_fnc_spawnHookSelectionMenu = {
 mst_fnc_moveIntoBasket = {
 	uscgheli = vehicle player;
 	player moveInAny hook;
-};
-
-mst_fnc_moveInAllOccupants = {
-	{
-		_x moveInAny vxf_vehicle;
-	} forEach crew basket;
-	titleText ["Crew Of Basket Is Secure!","PLAIN DOWN"];
 };
 
 mst_fnc_moveToHelicopter = {

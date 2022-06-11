@@ -48,6 +48,11 @@ mst_fnc_handleRopeDetach = {
 			hasDeployedStretcher = false;
 			publicVariable "hasDeployedStretcher";
 		};
+		if (hasDeployedBasket) then {
+			deleteVehicle basket_hook;
+			hasDeployedBasket = false;
+			publicVariable "hasDeployedBasket";
+		};
 	}];
 };
 
